@@ -4,6 +4,9 @@ import bodyParser from 'body-parser';
 import usersRoutes from '../routes/users.js';
 import inventoryRoutes from '../routes/inventory.js';
 import rolRoutes from '../routes/rol.js';
+import productsRoutes   from '../routes/products.js';
+import providersRoutes  from '../routes/providers.js';
+import stockRoutes      from '../routes/stock.js';
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -18,6 +21,9 @@ app.use(bodyParser.json());
 app.use('/api/users', usersRoutes);
 app.use('/api/inventory', inventoryRoutes);
 app.use('/api/roles', rolRoutes);
+app.use('/api/products', productsRoutes);
+app.use('/api/providers', providersRoutes);
+app.use('/api/stock', stockRoutes);
 
 app.get('/api', (_, res) => res.send('API abierta 🚀'));
 
