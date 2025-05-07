@@ -14,9 +14,9 @@ app.use(cors());
 app.use(bodyParser.json());
 
 /* Rutas */
-app.use('/api/users', usersRoutes);
-app.use('/api/inventory', inventoryRoutes);
-app.use('/api/roles', rolRoutes);
+app.use('/users', usersRoutes);
+app.use('/inventory', inventoryRoutes);
+app.use('/roles', rolRoutes);
 
 app.get('/', (_, res) => res.send('API abierta 🚀'));
 
