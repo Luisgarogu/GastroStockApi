@@ -21,4 +21,4 @@ app.use('/api/roles', rolRoutes);
 
 app.get('/', (_, res) => res.send('API abierta 🚀'));
 
-app.listen(PORT, () => console.log(`Servidor corriendo en http://localhost:${PORT}`));
+export default app;       
