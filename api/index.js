@@ -14,10 +14,12 @@ app.use(cors());
 app.use(bodyParser.json());
 
 /* Rutas */
-app.use('/users', usersRoutes);
-app.use('/inventory', inventoryRoutes);
-app.use('/roles', rolRoutes);
+// api/index.js
+app.use('/api/users', usersRoutes);
+app.use('/api/inventory', inventoryRoutes);
+app.use('/api/roles', rolRoutes);
 
-app.get('/', (_, res) => res.send('API abierta 🚀'));
+app.get('/api', (_, res) => res.send('API abierta 🚀'));
+
 
 export default app;       
