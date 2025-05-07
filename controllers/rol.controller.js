@@ -1,4 +1,4 @@
-import { pool } from '../db.js';
+import { pool } from '../lib/db.js';
 
 /* GET /api/roles ─────────────────────────── */
 export const getRoles = async (req, res) => {
