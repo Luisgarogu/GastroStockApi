@@ -7,6 +7,6 @@ const router = Router();
 
 router.get('/',   getStockMoves);           // listar / filtrar
 router.post('/',  createStockMove);         // nueva entrada / salida
-router.delete('/:id(\\d+)', deleteStockMove);
+router.delete('/:id', deleteStockMove);
 
 export default router;

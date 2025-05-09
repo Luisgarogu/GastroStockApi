@@ -6,9 +6,9 @@ import {
 const router = Router();
 
 router.get('/',          getProviders);
-router.get('/:id(\\d+)', getProvider);
+router.get('/:id', getProvider);
 router.post('/',         createProvider);
-router.put('/:id(\\d+)', updateProvider);
-router.delete('/:id(\\d+)', deleteProvider);
+router.put('/:id', updateProvider);
+router.delete('/:id', deleteProvider);
 
 export default router;

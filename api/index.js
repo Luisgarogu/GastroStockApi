@@ -15,7 +15,7 @@ const app = express();
 /* Middlewares */
 app.use(cors());
 app.use(bodyParser.json());
-
+//const PORT = process.env.PORT || 8000;
 /* Rutas */
 // api/index.js
 app.use('/api/users', usersRoutes);
@@ -24,6 +24,8 @@ app.use('/api/roles', rolRoutes);
 app.use('/api/products', productsRoutes);
 app.use('/api/providers', providersRoutes);
 app.use('/api/stock', stockRoutes);
+
+//app.listen(PORT, () => console.log(`Servidor corriendo en http://localhost:${PORT}`));
 
 app.get('/api', (_, res) => res.send('API abierta 🚀'));
 
