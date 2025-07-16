@@ -1,11 +1,13 @@
 import { OpenAI } from 'openai';
 import 'dotenv/config';
 
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+/* ─────────────── 1.  Nueva instancia apuntando a Together ─────────────── */
+const openai = new OpenAI({
+  apiKey : process.env.TOGETHER_API_KEY,                 // 👈 tu clave Together
+  baseURL: process.env.TOGETHER_BASE_URL                 // 👈 https://api.together.xyz/v1
+});
 
-/* POST /api/ai/suggest-meal
-   body: { "ingredients": ["arroz", "huevo", "cebolla"] }
-*/
+/* ─────────────── 2.  Handler ─ POST /api/ai/suggest-meal ─────────────── */
 export const suggestMeal = async (req, res) => {
   const { ingredients } = req.body ?? {};
   if (!Array.isArray(ingredients) || !ingredients.length) {
@@ -28,14 +30,18 @@ Devuelve el resultado en Markdown.
 `.trim();
 
     const chat = await openai.chat.completions.create({
-      model   : process.env.OPENAI_MODEL,
+      /*  Usa cualquiera de los modelos gratuitos de Together  */
+      /*  Ej.: 'togethercomputer/llama-3-8b-chat'              */
+      model   : process.env.TOGETHER_MODEL
+                ?? 'togethercomputer/llama-3-8b-chat',
       messages: [{ role: 'user', content: prompt }],
+      temperature: 0.7
     });
 
     const suggestion = chat.choices[0]?.message?.content?.trim() ?? '';
     res.json({ suggestion });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ msg: 'Error generando sugerencia' });
+    res.status(err.status ?? 500).json({ msg: err.message });
   }
 };
