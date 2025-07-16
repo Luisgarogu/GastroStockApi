@@ -33,7 +33,7 @@ Devuelve el resultado en Markdown.
       /*  Usa cualquiera de los modelos gratuitos de Together  */
       /*  Ej.: 'togethercomputer/llama-3-8b-chat'              */
       model   : process.env.TOGETHER_MODEL
-                ?? 'togethercomputer/llama-3-8b-chat',
+                ?? 'meta-llama/Llama-3.3-70B-Instruct-Turbo-Free',
       messages: [{ role: 'user', content: prompt }],
       temperature: 0.7
     });
