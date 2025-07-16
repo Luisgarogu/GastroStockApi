@@ -7,6 +7,7 @@ import rolRoutes from '../routes/rol.js';
 import productsRoutes   from '../routes/products.js';
 import providersRoutes  from '../routes/providers.js';
 import stockRoutes      from '../routes/stock.js';
+import aiRoutes      from '../routes/ai.js';
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -24,6 +25,8 @@ app.use('/api/roles', rolRoutes);
 app.use('/api/products', productsRoutes);
 app.use('/api/providers', providersRoutes);
 app.use('/api/stock', stockRoutes);
+app.use('/api/ai', aiRoutes);   
+
 
 //app.listen(PORT, () => console.log(`Servidor corriendo en http://localhost:${PORT}`));
 
