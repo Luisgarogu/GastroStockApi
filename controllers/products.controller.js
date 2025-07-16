@@ -34,25 +34,26 @@ export const updateProduct = async (req, res) => {
 };
 
 /* DELETE /products/:id */
+/* DELETE /products/:id */
 export const deleteProduct = async (req, res) => {
   const { id } = req.params;
-
+  const client = await pool.connect();
   try {
-    await pool.query('BEGIN');
+    await client.query('BEGIN');
 
-    await pool.query('DELETE FROM inventario        WHERE producto_id = $1', [id]);
-    await pool.query('DELETE FROM movimientos_stock WHERE producto_id = $1', [id]); // opcional
+    await client.query('DELETE FROM movimientos_stock WHERE producto_id=$1', [id]);
+    await client.query('DELETE FROM inventario        WHERE producto_id=$1', [id]);
+    await client.query('DELETE FROM productos         WHERE id=$1',          [id]);
 
-    const { rowCount } = await pool.query('DELETE FROM productos WHERE id = $1', [id]);
-
-    await pool.query('COMMIT');
-
-    if (rowCount) return res.sendStatus(204);
-    return res.status(404).json({ msg: 'Producto no encontrado' });
+    await client.query('COMMIT');
+    res.sendStatus(204);
   } catch (err) {
-    await pool.query('ROLLBACK');
+    await client.query('ROLLBACK');
     console.error(err);
-    res.status(500).json({ msg: 'No se pudo eliminar el producto' });
+    res.status(500).json({ msg: 'No se pudo eliminar' });
+  } finally {
+    client.release();
   }
 };
+
 
